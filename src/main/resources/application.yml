@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: rancher-web
+    thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      encoding: utf-8
+      suffix: .html
+      servlet:
+        content-type: text/html
+
+server:
+  port: 11911
