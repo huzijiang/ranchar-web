@@ -11,3 +11,6 @@ spring:
 
 server:
   port: 11911
+
+
+route add 42.192.204.211 10.0.16.12

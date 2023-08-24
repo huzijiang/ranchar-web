@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rancher-web-service
+spec:
+  selector:
+    app: rancher-web
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 12345
+      targetPort: 12345
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-rancher-web
+  labels:
+    app: rancher-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rancher-web
+  template:
+    metadata:
+      labels:
+        app: rancher-web
+    spec:
+      imagePullSecrets:
+        - name: pipeline-docker-registry
+      containers:
+        - name: maven
+          image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+          ports:
+            - containerPort: 12345
